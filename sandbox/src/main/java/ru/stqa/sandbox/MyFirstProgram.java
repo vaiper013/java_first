@@ -2,9 +2,12 @@ package ru.stqa.sandbox;
 
 class MyFirstProgram {
     public static void main(String[] args) {
-        Point pt=new Point(10.00,20.00,50.40,70.00);
+        Point p1=new Point(50.00,70.40);
 
-        System.out.println(pt.distance());
+        Point p2=new Point(10.00,80.40);
+
+        System.out.println(p1.distance(p2));
+
 
     }
 
