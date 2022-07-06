@@ -1,4 +1,4 @@
-package ru.stqa.sandbox;
+package ru.stqa.pft.sandbox;
 
 class MyFirstProgram {
     public static void main(String[] args) {
@@ -6,7 +6,7 @@ class MyFirstProgram {
 
         Point p2=new Point(10.00,80.40);
 
-        System.out.println(p1.distance(p2));
+        //System.out.println(p1.distance(p2));
 
 
     }
