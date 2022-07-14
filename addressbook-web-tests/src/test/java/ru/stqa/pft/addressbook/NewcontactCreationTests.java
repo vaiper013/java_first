@@ -1,5 +1,4 @@
 package ru.stqa.pft.addressbook;
-
 import java.util.concurrent.TimeUnit;
 import org.testng.annotations.*;
 import org.openqa.selenium.*;
@@ -27,22 +26,22 @@ public class NewcontactCreationTests {
 
   @Test
   public void testNewcontactCreation() throws Exception {
-    gotoContactPage();
-    initContactCreation();
+    gotoAddNewContact();
     fillConactForm(new ContactData("Vasiliy", "Bochkarev", "7777777", "vaipermail@rambler.ru"));
-    submitContactCrfeation();
     returnToContactPage();
   }
 
-  private void returnToContactPage() {
-    wd.findElement(By.linkText("Logout")).click();
+  //private void returnToContactPage() {
+    //wd.findElement(By.linkText("Logout")).click();
+ // }
+
+  private void gotoAddNewContact() {
+    wd.findElement(By.linkText("add new")).click();
   }
 
-  private void submitContactCrfeation() {
-    wd.findElement(By.linkText("home page")).click();
-  }
 
   private void fillConactForm(ContactData contactData) {
+    wd.findElement(By.name("firstname")).click();
     wd.findElement(By.name("firstname")).clear();
     wd.findElement(By.name("firstname")).sendKeys(contactData.getFirstName());
     wd.findElement(By.name("lastname")).click();
@@ -57,13 +56,14 @@ public class NewcontactCreationTests {
     wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
   }
 
-  private void initContactCreation() {
-    wd.findElement(By.name("firstname")).click();
+  private void returnToContactPage() {
+    wd.findElement(By.linkText("home page")).click();
   }
 
-  private void gotoContactPage() {
-    wd.findElement(By.linkText("add new")).click();
-  }
+
+
+  //private void initContactCreation() {
+  //  }
 
   @AfterMethod(alwaysRun = true)
   public void tearDown() throws Exception {

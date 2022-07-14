@@ -29,37 +29,49 @@ public class TestBase {
       wd.findElement(By.xpath("//input[@value='Login']")).click();
     }
 
-    protected void returnToGroupPage(By Logout) {
-      wd.findElement(Logout).click();
+
+
+
+
+    protected void gotoGroupPage() {wd.findElement(By.linkText("groups")).click();
+
     }
 
-    protected void submitGroupCrfeation() {
-      wd.findElement(By.linkText("group page")).click();
+    protected void initGroupCreation() {wd.findElement(By.name("new")).click();
+
     }
 
     protected void fillGroupForm(GroupData groupData) {
-      wd.findElement(By.name("group_name")).clear();
-      wd.findElement(By.name("group_name")).sendKeys(groupData.getName());
-      wd.findElement(By.name("group_header")).click();
-      wd.findElement(By.name("group_header")).clear();
-      wd.findElement(By.name("group_header")).sendKeys(groupData.getHeader());
-      wd.findElement(By.name("group_footer")).click();
-      wd.findElement(By.name("group_footer")).clear();
-      wd.findElement(By.name("group_footer")).sendKeys(groupData.getFooter());
-      wd.findElement(By.name("submit")).click();
+        wd.findElement(By.name("group_name")).click();
+        wd.findElement(By.name("group_name")).clear();
+        wd.findElement(By.name("group_name")).sendKeys(groupData.getName());
+        wd.findElement(By.name("group_header")).click();
+        wd.findElement(By.name("group_header")).clear();
+        wd.findElement(By.name("group_header")).sendKeys(groupData.getHeader());
+        wd.findElement(By.name("group_footer")).click();
+        wd.findElement(By.name("group_footer")).clear();
+        wd.findElement(By.name("group_footer")).sendKeys(groupData.getFooter());
+
     }
 
-    protected void initGroupCreation() {
-      wd.findElement(By.name("group_name")).click();
-    }
-
-    protected void gotoGroupPage() {
-      wd.findElement(By.name("new")).click();
+    protected void submitGroupCreation() {
+        wd.findElement(By.name("submit")).click();
     }
 
     protected void returnToGroupPage() {
-        wd.findElement(By.linkText("Logout")).click();
+        wd.findElement(By.linkText("group page")).click();
     }
+
+
+    protected void deleteSelectedGroups() {
+        wd.findElement(By.name("delete")).click();
+    }
+
+    protected void selectGroup() {
+        wd.findElement(By.name("selected[]")).click();
+    }
+
+
 
     @AfterMethod(alwaysRun = true)
     public void tearDown() throws Exception {
@@ -86,4 +98,8 @@ public class TestBase {
 
 
 
+
+    //protected void returnToGroupPage() {
+    //  wd.findElement(By.linkText("Logout")).click();
+    // }
 }
