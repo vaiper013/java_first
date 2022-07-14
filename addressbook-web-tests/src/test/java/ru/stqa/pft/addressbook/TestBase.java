@@ -97,6 +97,44 @@ public class TestBase {
     }
 
 
+    //Contakt
+
+    protected void gotoAddNewContact() {
+      wd.findElement(By.linkText("add new")).click();
+    }
+
+    protected void fillConactForm(ContactData contactData) {
+      wd.findElement(By.name("firstname")).click();
+      wd.findElement(By.name("firstname")).clear();
+      wd.findElement(By.name("firstname")).sendKeys(contactData.getFirstName());
+      wd.findElement(By.name("lastname")).click();
+      wd.findElement(By.name("lastname")).clear();
+      wd.findElement(By.name("lastname")).sendKeys(contactData.getLastName());
+      wd.findElement(By.name("home")).click();
+      wd.findElement(By.name("home")).clear();
+      wd.findElement(By.name("home")).sendKeys(contactData.getAllPhones());
+      wd.findElement(By.name("email")).click();
+      wd.findElement(By.name("email")).clear();
+      wd.findElement(By.name("email")).sendKeys(contactData.getAllEmail());
+      wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
+    }
+
+    protected void returnToContactPage() {
+      wd.findElement(By.linkText("home page")).click();
+    }
+
+    protected void homeContact() {
+      wd.findElement(By.linkText("home")).click();
+    }
+
+
+    protected void deleteContact() {
+      wd.findElement(By.xpath("//input[@value='Delete']")).click();
+    }
+
+    protected void dialogAccept() {
+        wd.switchTo().alert().accept();
+    }
 
 
     //protected void returnToGroupPage() {
