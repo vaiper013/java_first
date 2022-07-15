@@ -18,6 +18,8 @@ public class TestBase {
         app.stop();
     }
 
+
+
     //protected void returnToGroupPage() {
     //  wd.findElement(By.linkText("Logout")).click();
     // }

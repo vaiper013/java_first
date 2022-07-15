@@ -18,9 +18,11 @@ public class HelperBase {
         wd.findElement(locator).sendKeys(text);
     }
 
-    protected void click(By locator) {
+    public void click(By locator) {
         wd.findElement(locator).click();
     }
+
+
 
     public boolean isElementPresent(By by) {
         try {
@@ -38,5 +40,12 @@ public class HelperBase {
         } catch (NoAlertPresentException e) {
             return false;
         }
+    }
+
+
+    public void type(String firstname, String contactData) {
+        click(By.name(firstname));
+        wd.findElement(By.name(firstname)).clear();
+        wd.findElement(By.name(firstname)).sendKeys(contactData);
     }
 }
