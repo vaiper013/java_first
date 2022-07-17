@@ -8,13 +8,12 @@ public class GroupHelper  extends HelperBase{
 
 
 
+
     public GroupHelper(WebDriver wd) {
         super(wd);
     }
 
-    public void initGroupCreation() { click(By.name("new"));
 
-    }
 
     public void fillGroupForm(GroupData groupData) {
         type(By.name("group_name"), groupData.getName());
@@ -39,5 +38,10 @@ public class GroupHelper  extends HelperBase{
         click(By.name("selected[]"));
     }
 
+    public void initGroupCreation() { click(By.name("new")); }
 
+    public void initGroupModification () { click(By.name("edit")); }
+
+    public void submitGroupModification() {click(By.name("update"));
+    }
 }
