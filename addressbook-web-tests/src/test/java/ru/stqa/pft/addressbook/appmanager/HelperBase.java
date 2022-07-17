@@ -43,9 +43,9 @@ public class HelperBase {
     }
 
 
-    public void type(String firstname, String contactData) {
-        click(By.name(firstname));
-        wd.findElement(By.name(firstname)).clear();
-        wd.findElement(By.name(firstname)).sendKeys(contactData);
+    public void type(String arbitrary, String contactData) {
+                click(By.name(arbitrary));
+        wd.findElement(By.name(arbitrary)).clear();
+        wd.findElement(By.name(arbitrary)).sendKeys(contactData);
     }
 }
