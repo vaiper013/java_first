@@ -16,6 +16,7 @@ public class ApplicationManager {
     public ContactHelper contactHelper;
     public String browser;
 
+
     public ApplicationManager(String browser) {
         this.browser = browser;
     }
@@ -25,7 +26,8 @@ public class ApplicationManager {
         if (browser == BrowserType.FIREFOX) {
             wd = new FirefoxDriver();
         } else if (browser == BrowserType.CHROME) {
-            wd = new ChromeDriver();}
+            wd = new ChromeDriver();
+        }
     }
 
     {
