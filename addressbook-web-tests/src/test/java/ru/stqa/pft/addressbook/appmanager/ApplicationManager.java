@@ -22,10 +22,10 @@ public class ApplicationManager {
 
 
     public void init() {
-        if (browser == FIREFOX) {
+        if (browser == BrowserType.FIREFOX) {
             wd = new FirefoxDriver();
-        } else if (browser == BrowserType.CHROME)
-            wd = new ChromeDriver();
+        } else if (browser == BrowserType.CHROME) {
+            wd = new ChromeDriver();}
     }
 
     {
