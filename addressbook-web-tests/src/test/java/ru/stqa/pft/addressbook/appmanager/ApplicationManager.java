@@ -4,9 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.BrowserType;
-
 import java.util.concurrent.TimeUnit;
-
 import static org.openqa.selenium.remote.BrowserType.FIREFOX;
 
 public class ApplicationManager {
@@ -16,7 +14,7 @@ public class ApplicationManager {
     public GroupHelper groupHelper;
     public SessionHelper sessionHelper;
     public ContactHelper contactHelper;
-    private String browser;
+    public String browser;
 
     public ApplicationManager(String browser) {
         this.browser = browser;
