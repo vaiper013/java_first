@@ -5,7 +5,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.BrowserType;
 import java.util.concurrent.TimeUnit;
-import static org.openqa.selenium.remote.BrowserType.FIREFOX;
 
 public class ApplicationManager {
 
@@ -16,22 +15,19 @@ public class ApplicationManager {
     public ContactHelper contactHelper;
     public String browser;
 
-
     public ApplicationManager(String browser) {
         this.browser = browser;
     }
 
-
     public void init() {
-        if (browser == BrowserType.FIREFOX) {
+        if (browser.equals(BrowserType.FIREFOX)) {
             wd = new FirefoxDriver();
-        } else if (browser == BrowserType.CHROME) {
+        } else if (browser.equals(BrowserType.CHROME)) {
             wd = new ChromeDriver();
+        } else {
+            // По-умолчанию:
+            wd = new FirefoxDriver();
         }
-    }
-
-    {
-        wd = new FirefoxDriver();
         wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         wd.get("http://localhost/addressbook/group.php");
         groupHelper = new GroupHelper(wd);
