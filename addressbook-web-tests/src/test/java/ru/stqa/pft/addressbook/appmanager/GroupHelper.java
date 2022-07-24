@@ -51,8 +51,4 @@ public class GroupHelper  extends HelperBase{
         submitGroupCreation();
         returnToGroupPage();
     }
-
-    public boolean isThereAGroup() {
-        return isElementPresent(By.name("selected[]"));
-    }
 }

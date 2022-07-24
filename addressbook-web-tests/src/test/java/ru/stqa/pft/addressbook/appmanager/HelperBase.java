@@ -48,4 +48,12 @@ public class HelperBase {
         wd.findElement(By.name(arbitrary)).clear();
         wd.findElement(By.name(arbitrary)).sendKeys(contactData);
     }
+
+    public boolean isThereAGroup() {
+        return isElementPresent(By.name("selected[]"));
+    }
+
+    public boolean isThereAConact() {
+        return isElementPresent(By.name("selected[]"));
+    }
 }
