@@ -44,4 +44,8 @@ public class ContactHelper extends HelperBase {
         fillConactForm (contact);
         returnToContactPage();
     }
+
+    public int getContactCount() {
+        return wd.findElements(By.name("selected[]")).size();
+    }
 }
