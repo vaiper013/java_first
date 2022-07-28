@@ -7,9 +7,7 @@ import ru.stqa.pft.addressbook.model.GroupData;
 public class GroupHelper  extends HelperBase{
 
 
-
-
-    public GroupHelper(WebDriver wd) {
+      public GroupHelper(WebDriver wd) {
         super(wd);
     }
 
@@ -51,4 +49,10 @@ public class GroupHelper  extends HelperBase{
         submitGroupCreation();
         returnToGroupPage();
     }
+
+    public int getGroupCount() {
+          return wd.findElements(By.name("selected[]")).size();
+    }
+
+
 }
