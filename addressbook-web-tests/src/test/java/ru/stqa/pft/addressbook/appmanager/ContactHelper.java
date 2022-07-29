@@ -29,7 +29,8 @@ public class ContactHelper extends HelperBase {
 
     public void dialogAccept() { wd.switchTo().alert().accept(); }
 
-    public void selectContact() { click(By.name("selected[]"));
+    public void selectContact(int index) {
+        wd.findElements(By.name("selected[]")).get(index).click();
     }
 
     public void initContactModification () { click(By.xpath("//img[@alt='Edit']"));
