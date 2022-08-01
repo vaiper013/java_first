@@ -25,29 +25,38 @@ public class ContactHelper extends HelperBase {
         click(By.xpath("//div[@id='content']/form/input[21]"));
     }
 
-    public void returnToContactPage() { click(By.linkText("home page")); }
+    public void returnToContactPage() {
+        click(By.linkText("home page"));
+    }
 
-    public void homeContact() { click(By.linkText("home")); }
+    public void homeContact() {
+        click(By.linkText("home"));
+    }
 
     public void deleteContact() {
-        click(By.xpath("//input[@value='Delete']")); }
+        click(By.xpath("//input[@value='Delete']"));
+    }
 
-    public void dialogAccept() { wd.switchTo().alert().accept(); }
+    public void dialogAccept() {
+        wd.switchTo().alert().accept();
+    }
 
     public void selectContact(int index) {
         wd.findElements(By.name("selected[]")).get(index).click();
     }
 
-    public void initContactModification () { click(By.xpath("//img[@alt='Edit']"));
+    public void initContactModification() {
+        click(By.xpath("//img[@alt='Edit']"));
     }
 
-    public void submitContactModification() { click(By.name("update"));
+    public void submitContactModification() {
+        click(By.name("update"));
     }
 
 
     public void createContact(ContactData contact) {
         click(By.linkText("add new"));
-        fillConactForm (contact);
+        fillConactForm(contact);
         returnToContactPage();
     }
 
@@ -59,16 +68,16 @@ public class ContactHelper extends HelperBase {
         List<ContactData> contacts = new ArrayList<ContactData>();
         List<WebElement> elements = wd.findElements(By.name("entry"));//By.name("entry") (By.cssSelector("tr[name=entry]"))
         for (WebElement element : elements) {
-            System.out.println("result:" + element.getText());
+            String id = element.findElement(By.tagName("input")).getAttribute("value");
             List<WebElement> cells = element.findElements(By.tagName("td"));
-            System.out.println(cells.get(1).getText());
-            String id = element.findElement(By.tagName("input")). getAttribute("value");
             ContactData contact = new ContactData(id, cells.get(2).getText(), cells.get(1).getText(), null, null);
             contacts.add(contact);
         }
         return contacts;
     }
 }
-    //List<WebElement> cells = element.findElements(By.tagName("td"));
+//List<WebElement> cells = element.findElements(By.tagName("td"));
 //String[] elems = element.getText().split("\\s"); // VARIANT A
 //ContactData contact = new ContactData(id, elems[1], elems[0], null, null); // VARIANT A
+//System.out.println(cells.get(1).getText());
+//System.out.println("result:" + element.getText());
