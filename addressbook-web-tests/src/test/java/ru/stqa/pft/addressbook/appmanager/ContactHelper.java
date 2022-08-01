@@ -7,6 +7,7 @@ import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ContactHelper extends HelperBase {
@@ -56,13 +57,18 @@ public class ContactHelper extends HelperBase {
 
     public List<ContactData> getContactList() {
         List<ContactData> contacts = new ArrayList<ContactData>();
-        List<WebElement> elements = wd.findElements(By.cssSelector("tr[name=entry]"));
+        List<WebElement> elements = wd.findElements(By.name("entry"));//By.name("entry") (By.cssSelector("tr[name=entry]"))
         for (WebElement element : elements) {
-            String name = element.getText();
+            System.out.println("result:" + element.getText());
+            List<WebElement> cells = element.findElements(By.tagName("td"));
+            System.out.println(cells.get(1).getText());
             String id = element.findElement(By.tagName("input")). getAttribute("value");
-            ContactData contact = new ContactData(id,name, name, null, null);
+            ContactData contact = new ContactData(id, cells.get(2).getText(), cells.get(1).getText(), null, null);
             contacts.add(contact);
         }
         return contacts;
     }
 }
+    //List<WebElement> cells = element.findElements(By.tagName("td"));
+//String[] elems = element.getText().split("\\s"); // VARIANT A
+//ContactData contact = new ContactData(id, elems[1], elems[0], null, null); // VARIANT A

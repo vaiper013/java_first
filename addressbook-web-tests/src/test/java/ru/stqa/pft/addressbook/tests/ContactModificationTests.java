@@ -19,12 +19,12 @@ public class ContactModificationTests extends TestBase {
         List<ContactData> before = app.getContactHelper().getContactList();
         app.getContactHelper().selectContact(before.size() - 1);
         app.getContactHelper().initContactModification();
-        ContactData contact =new ContactData(before.get(before.size()-1).getId(),"Vasiliy013", "Inanov", "+78917", "vaiper@rambler.ru");
-        app.getContactHelper ().fillConactForm (contact);
+        ContactData contact = new ContactData(before.get(before.size()-1).getId(),"Vasiliy013", "Inanov", "+78917", "vaiper@rambler.ru");
+        app.getContactHelper().fillConactForm(contact);
         app.getContactHelper().submitContactModification();
         app.getContactHelper().returnToContactPage();
         List<ContactData> after = app.getContactHelper().getContactList();
-        Assert.assertEquals(after.size(), before.size() );
+        Assert.assertEquals(after.size(), before.size());
 
         before.remove(before.size() -1);
         before.add (contact);
