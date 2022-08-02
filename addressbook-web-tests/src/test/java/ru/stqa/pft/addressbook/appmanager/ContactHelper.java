@@ -68,7 +68,7 @@ public class ContactHelper extends HelperBase {
         List<ContactData> contacts = new ArrayList<ContactData>();
         List<WebElement> elements = wd.findElements(By.name("entry"));//By.name("entry") (By.cssSelector("tr[name=entry]"))
         for (WebElement element : elements) {
-            String id = element.findElement(By.tagName("input")).getAttribute("value");
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
             List<WebElement> cells = element.findElements(By.tagName("td"));
             ContactData contact = new ContactData(id, cells.get(2).getText(), cells.get(1).getText(), null, null);
             contacts.add(contact);
@@ -76,6 +76,7 @@ public class ContactHelper extends HelperBase {
         return contacts;
     }
 }
+//int id = element.findElement(By.tagName("input")).getAttribute("value");
 //List<WebElement> cells = element.findElements(By.tagName("td"));
 //String[] elems = element.getText().split("\\s"); // VARIANT A
 //ContactData contact = new ContactData(id, elems[1], elems[0], null, null); // VARIANT A
