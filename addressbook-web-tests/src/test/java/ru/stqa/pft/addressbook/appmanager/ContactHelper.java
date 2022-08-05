@@ -69,7 +69,7 @@ public class ContactHelper extends HelperBase {
 
     public List<ContactData> getContactList() {
         List<ContactData> contacts = new ArrayList<ContactData>();
-        List<WebElement> elements = wd.findElements(By.cssSelector("tr[name=entry]"));//(By.name("entry"));//By.name("entry") (By.cssSelector("tr[name=entry]"))
+        List<WebElement> elements = wd.findElements(By.name("entry"));//(By.cssSelector("tr[name=entry]"))
         for (WebElement element : elements) {
             //String name = element.getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
