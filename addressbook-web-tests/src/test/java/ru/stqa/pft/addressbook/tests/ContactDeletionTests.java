@@ -19,7 +19,7 @@ public class ContactDeletionTests extends TestBase {
   public void testContactDeletion()  {
     List<ContactData> before = app.goToCon().ListCon();
     int index = before.size() - 1;
-    app.goToCon().delete(index);
+    app.goToCon().deleteCon(index);
     List<ContactData> after = app.goToCon().ListCon();
     Assert.assertEquals(after.size(), before.size() -1);
 
