@@ -3,31 +3,31 @@ package ru.stqa.pft.addressbook.model;
 import java.util.Objects;
 
 public class ContactData {
-    private  int id;
-    private final String firstName;
-    private final String lastName;
-    private final String allPhones;
-    private final String allEmail;
+    private  int id = Integer.MAX_VALUE;
+    private String firstName;
+    private String lastName;
+    private String allPhones;
+    private String allEmail;
 
 
 
-    public ContactData(String firstName, String lastName, String allPhones, String allEmail) {
-        this.id = Integer.MAX_VALUE;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.allPhones = allPhones;
-        this.allEmail = allEmail;
-    }
+    //public ContactData(String firstName, String lastName, String allPhones, String allEmail) {
+        //this.id = Integer.MAX_VALUE;
+        //this.firstName = firstName;
+       // this.lastName = lastName;
+        //this.allPhones = allPhones;
+        //this.allEmail = allEmail;
+    //}
 
 
 
-    public ContactData(int id, String firstName, String lastName, String allPhones, String allEmail) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.allPhones = allPhones;
-        this.allEmail = allEmail;
-    }
+    //public ContactData(int id, String firstName, String lastName, String allPhones, String allEmail) {
+       // this.id = id;
+        //this.firstName = firstName;
+       // this.lastName = lastName;
+        //this.allPhones = allPhones;
+       // this.allEmail = allEmail;
+   // }
 
     public int getId() {
         return id;
@@ -48,8 +48,29 @@ public class ContactData {
         return allEmail;
     }
 
-    public void setId(int id) {
+    public ContactData withId(int id) {
         this.id = id;
+        return this;
+    }
+
+    public ContactData withFirstName(String firstName) {
+        this.firstName = firstName;
+        return this;
+    }
+
+    public ContactData withLastName(String lastName) {
+        this.lastName = lastName;
+        return this;
+    }
+
+    public ContactData withAllPhones(String allPhones) {
+        this.allPhones = allPhones;
+        return this;
+    }
+
+    public ContactData withAllEmail(String allEmail) {
+        this.allEmail = allEmail;
+        return this;
     }
 
     @Override

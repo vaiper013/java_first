@@ -87,15 +87,16 @@ public class ContactHelper extends HelperBase {
             //String name = element.getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
             List<WebElement> cells = element.findElements(By.tagName("td"));
-            ContactData contact = new ContactData(id, cells.get(2).getText(), cells.get(1).getText(), null, null);
-            contacts.add(contact);
+            contacts.add( new ContactData().withId(id).withFirstName(cells.get(2).getText()).withLastName(cells.get(1).getText()));
         }
         return contacts;
     }
 }
+//ContactData contact = new ContactData().withId(id).withLastName(cells.get(2).getText()).withFirstName(cells.get(1).getText());
 //int id = element.findElement(By.tagName("input")).getAttribute("value");
 //List<WebElement> cells = element.findElements(By.tagName("td"));
 //String[] elems = element.getText().split("\\s"); // VARIANT A
 //ContactData contact = new ContactData(id, elems[1], elems[0], null, null); // VARIANT A
 //System.out.println(cells.get(1).getText());
 //System.out.println("result:" + element.getText());
+//ContactData contact = new ContactData(id, cells.get(2).getText(), cells.get(1).getText(), null, null);

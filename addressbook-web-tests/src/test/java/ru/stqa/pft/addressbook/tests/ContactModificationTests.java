@@ -1,9 +1,7 @@
 package ru.stqa.pft.addressbook.tests;
-
 import org.testng.Assert;
 import org.testng.annotations.*;
 import ru.stqa.pft.addressbook.model.ContactData;
-
 import java.util.Comparator;
 import java.util.List;
 
@@ -13,7 +11,8 @@ public class ContactModificationTests extends TestBase {
     public void ensurePreconditions () {
         app.goToCon().homeContact();
         if (app.goToCon().ListCon().size() == 0) {
-            app.goToCon().create(new ContactData("Vasiliy", "Bochkarev", "7777777", "vaipermail@rambler.ru"));
+            app.goToCon().create(new ContactData().
+                    withFirstName("Vasiliy").withLastName("Bochkarev").withAllPhones("7777777").withAllEmail("vaipermail@rambler.ru"));
         }
     }
 
@@ -21,7 +20,8 @@ public class ContactModificationTests extends TestBase {
     public void ContactModification() {
         List<ContactData> before = app.goToCon().ListCon();
         int index = before.size() - 1;
-        ContactData contact = new ContactData(before.get(index).getId(), "Vasiliy013", "Inanov", "+78917", "vaiper@rambler.ru");
+        ContactData contact = new ContactData().
+                withId(before.get(index).getId()).withFirstName("Vasiliy013").withLastName("Inanov").withAllPhones("+78917").withAllEmail("vaiper@rambler.ru");
         app.goToCon().modify(index, contact);
         List<ContactData> after = app.goToCon().ListCon();
         Assert.assertEquals(after.size(), before.size());
@@ -37,7 +37,6 @@ public class ContactModificationTests extends TestBase {
 }
 
     //Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
-
     //before.remove(before.size() -1);
     //before.add (contact);
     //Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
