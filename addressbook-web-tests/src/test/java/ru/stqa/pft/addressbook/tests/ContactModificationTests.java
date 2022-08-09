@@ -4,6 +4,7 @@ import org.testng.annotations.*;
 import ru.stqa.pft.addressbook.model.ContactData;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 public class ContactModificationTests extends TestBase {
 
@@ -18,18 +19,17 @@ public class ContactModificationTests extends TestBase {
 
     @Test
     public void ContactModification() {
-        List<ContactData> before = app.goToCon().ListCon();
-        int index = before.size() - 1;
-        ContactData contact = new ContactData().
-                withId(before.get(index).getId()).withFirstName("Vasiliy013").withLastName("Inanov").withAllPhones("+78917").withAllEmail("vaiper@rambler.ru");
-        app.goToCon().modify(index, contact);
-        List<ContactData> after = app.goToCon().ListCon();
+        Set<ContactData> before = app.goToCon().all();
+        ContactData modifiedContact = before.iterator().next();
+                ContactData contact = new ContactData().
+                withId(modifiedContact.getId()).withFirstName("Vasiliy013").withLastName("Inanov").withAllPhones("+78917").withAllEmail("vaiper@rambler.ru");
+        app.goToCon().modify(contact);
+        Set<ContactData> after = app.goToCon().all();
         Assert.assertEquals(after.size(), before.size());
-        before.remove(index);
+
+        before.remove(modifiedContact);
         before.add(contact);
-        Comparator<? super ContactData> byid = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
-        before.sort(byid);
-        after.sort(byid);
+
         Assert.assertEquals(before, after);
 
 
@@ -40,6 +40,9 @@ public class ContactModificationTests extends TestBase {
     //before.remove(before.size() -1);
     //before.add (contact);
     //Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
-
+//int index = before.size() - 1;
+//Comparator<? super ContactData> byid = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
+//        before.sort(byid);
+//        after.sort(byid);
 
 
