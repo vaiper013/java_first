@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import java.util.HashSet;
 import java.util.List;
@@ -59,6 +60,7 @@ public class ContactHelper extends HelperBase {
     public void create(ContactData contact) {
         click(By.linkText("add new"));
         fillConactForm(contact);
+        contactCacshe = null;
         returnToContactPage();
     }
 
@@ -69,6 +71,7 @@ public class ContactHelper extends HelperBase {
         initContactModificationById(contact.getId());
         fillConactForm(contact);
         submitContactModification();
+        contactCacshe = null;
         returnToContactPage();
     }
 
@@ -76,6 +79,7 @@ public class ContactHelper extends HelperBase {
         selectContactById(contact.getId());
         deleteContact();
         dialogAccept();
+        contactCacshe = null;
         homeContact();
     }
 
@@ -83,16 +87,20 @@ public class ContactHelper extends HelperBase {
         return wd.findElements(By.name("selected[]")).size();
     }
 
+    private Contacts contactCacshe = null;
 
     public Contacts all() {
-        Contacts contacts = new Contacts();
+            if (contactCacshe !=null) {
+                return new Contacts (contactCacshe);
+            }
+        contactCacshe = new Contacts();
         List<WebElement> elements = wd.findElements(By.name("entry"));//(By.cssSelector("tr[name=entry]"))
         for (WebElement element : elements) {
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
             List<WebElement> cells = element.findElements(By.tagName("td"));
-            contacts.add( new ContactData().withId(id).withFirstName(cells.get(2).getText()).withLastName(cells.get(1).getText()));
+            contactCacshe.add( new ContactData().withId(id).withFirstName(cells.get(2).getText()).withLastName(cells.get(1).getText()));
         }
-        return contacts;
+        return new Contacts(contactCacshe);
     }
 }
 //ContactData contact = new ContactData().withId(id).withLastName(cells.get(2).getText()).withFirstName(cells.get(1).getText());
