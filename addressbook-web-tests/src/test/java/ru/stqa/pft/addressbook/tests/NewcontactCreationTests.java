@@ -15,8 +15,8 @@ public class NewcontactCreationTests extends TestBase {
         ContactData contact = new ContactData().
                 withFirstName("Vasiliy").withLastName("Bochkarev").withAllPhones("7777777").withAllEmail("vaipermail@rambler.ru");
         app.goToCon().create(contact);
+        assertThat(app.Group().count(), equalTo(before.size() +1));
         Contacts after = app.goToCon().all();
-        assertThat(after.size(), equalTo(before.size() +1));
         assertThat(after, equalTo(
                 before.withAdded(contact.withId(after.stream().mapToInt((g)->g.getId()).max().getAsInt()))));
     }
@@ -36,3 +36,4 @@ public class NewcontactCreationTests extends TestBase {
 //Assert.assertEquals(after.size(), before.size() + 1);
 //before.add(contact);
 //contact.withId(after.stream().mapToInt((g)->g.getId()).max().getAsInt());
+//assertThat(after.size(), equalTo(before.size() +1));
