@@ -8,12 +8,13 @@ public class ContactData {
     private String lastName;
     private String allPhones;
     private String allEmail;
+
+    private String allAddress;
     private String homePhone;
     private String mobilePhone;
     private String workPhone;
 
-    public String getHomePhone() {
-        return homePhone;
+    public String getHomePhone() { return homePhone;
     }
 
     public String getMobilePhone() {
@@ -23,28 +24,6 @@ public class ContactData {
     public String getWorkPhone() {
         return workPhone;
     }
-
-
-
-
-
-    //public ContactData(String firstName, String lastName, String allPhones, String allEmail) {
-        //this.id = Integer.MAX_VALUE;
-        //this.firstName = firstName;
-       // this.lastName = lastName;
-        //this.allPhones = allPhones;
-        //this.allEmail = allEmail;
-    //}
-
-
-
-    //public ContactData(int id, String firstName, String lastName, String allPhones, String allEmail) {
-       // this.id = id;
-        //this.firstName = firstName;
-       // this.lastName = lastName;
-        //this.allPhones = allPhones;
-       // this.allEmail = allEmail;
-   // }
 
     public int getId() {
         return id;
@@ -64,6 +43,8 @@ public class ContactData {
     public String getAllEmail() {
         return allEmail;
     }
+
+    public String getAllAddress() { return allAddress; }
 
     public ContactData withId(int id) {
         this.id = id;
@@ -106,6 +87,16 @@ public class ContactData {
         return this;
     }
 
+    public ContactData withAllAddress(String allAddress) {
+        this.allAddress = allAddress;
+        return this;
+    }
+
+
+
+
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -130,3 +121,21 @@ public class ContactData {
 
 
 }
+
+//public ContactData(String firstName, String lastName, String allPhones, String allEmail) {
+//this.id = Integer.MAX_VALUE;
+//this.firstName = firstName;
+// this.lastName = lastName;
+//this.allPhones = allPhones;
+//this.allEmail = allEmail;
+//}
+
+
+
+//public ContactData(int id, String firstName, String lastName, String allPhones, String allEmail) {
+// this.id = id;
+//this.firstName = firstName;
+// this.lastName = lastName;
+//this.allPhones = allPhones;
+// this.allEmail = allEmail;
+// }
