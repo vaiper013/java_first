@@ -113,9 +113,9 @@ public class ContactHelper extends HelperBase {
         for (WebElement element : elements) {
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
             List<WebElement> cells = element.findElements(By.tagName("td"));
-            String [] phones = cells.get(5).getText().split("\n");
+            String allphones = cells.get(5).getText();
             contactCacshe.add( new ContactData().withId(id).withFirstName(cells.get(2).getText()).withLastName(cells.get(1).getText())
-                    .withHomePhone(phones[0]).withMobilePhone(phones[1]).withWorkPhone(phones[2]));
+                    .withAllPhones(allphones));
         }
         return new Contacts(contactCacshe);
     }
@@ -172,3 +172,7 @@ public class ContactHelper extends HelperBase {
 //        }
 //        return new Contacts(contactCacshe);
 //    }
+//String [] phones = cells.get(5).getText().split("\n");
+//            contactCacshe.add( new ContactData().withId(id).withFirstName(cells.get(2).getText()).withLastName(cells.get(1).getText())
+//                    .withHomePhone(phones[0]).withMobilePhone(phones[1]).withWorkPhone(phones[2]));
+//        }
