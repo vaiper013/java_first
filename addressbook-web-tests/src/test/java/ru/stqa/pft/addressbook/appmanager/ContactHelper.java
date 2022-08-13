@@ -20,6 +20,7 @@ public class ContactHelper extends HelperBase {
         type("lastname", contactData.getLastName());
         type("home", contactData.getAllPhones());
         type("email", contactData.getAllEmail());
+        attach(By.name("photo"), contactData.getPhoto());
         click(By.xpath("//div[@id='content']/form/input[21]"));
     }
 
