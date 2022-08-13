@@ -58,9 +58,12 @@ public class ContactHelper extends HelperBase {
         String home = wd.findElement(By.name("home")).getAttribute("value");
         String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
         String work = wd.findElement(By.name("work")).getAttribute("value");
+        String address = wd.findElement(By.name("address")).getAttribute("value");
+        String email = wd.findElement(By.name("email")).getAttribute("value");
         wd.navigate().back();
         return new ContactData().withId(contact.getId()).withFirstName(firstname).withLastName(lastname).
-                withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work);
+                withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work).withAllAddress(address)
+                .withAllEmail(email);
 
 
 
@@ -113,11 +116,11 @@ public class ContactHelper extends HelperBase {
         for (WebElement element : elements) {
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
             List<WebElement> cells = element.findElements(By.tagName("td"));
-            String allphones = cells.get(5).getText();
+            String allPhones = cells.get(5).getText();
             String allEmail = cells.get(4).getText();
             String allAddress = cells.get(3).getText();
             contactCacshe.add( new ContactData().withId(id).withFirstName(cells.get(2).getText()).withLastName(cells.get(1).getText())
-                    .withAllPhones(allphones).withAllAddress(allAddress).withAllEmail(allEmail));
+                    .withAllPhones(allPhones).withAllEmail(allEmail).withAllAddress(allAddress));
         }
         return new Contacts(contactCacshe);
     }
