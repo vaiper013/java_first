@@ -6,13 +6,14 @@ import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 
-public class ContactPhoneTests extends TestBase {
+public class ContactTests extends TestBase {
 
     @BeforeMethod
     public void ensurePreconditions() {
@@ -40,28 +41,37 @@ public class ContactPhoneTests extends TestBase {
 
 
     private String mergePhones(ContactData contact) {
-        return Arrays.asList(contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone())
+        return Arrays.asList(contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone(), contact.getFax())
                 .stream().filter((s) -> !s.equals(""))
-                .map(ContactPhoneTests::cleaned)
+                .map(ContactTests::cleaned)
                 .collect(Collectors.joining("\n"));
     }
 
     private String mergeAddress(ContactData contact) {
-        return Arrays.asList(contact.getAllAddress())
-                .stream().filter((s) -> !s.equals(""))
-                .map(ContactPhoneTests::cleaned)
-                .collect(Collectors.joining("\n"));
-            }
+        return contact.getAllAddress();
+    }
 
     private String mergeEmail(ContactData contact) {
         return Arrays.asList(contact.getAllEmail())
                 .stream().filter((s) -> !s.equals(""))
-                .map(ContactPhoneTests::cleaned)
+                .map(ContactTests::cleaned)
                 .collect(Collectors.joining("\n"));
+
     }
+
+
 
 
     public static String cleaned(String phone) {
         return phone.replaceAll("\\s", "").replaceAll("[-()]", "");
     }
+
+
+
+
+
+
 }
+
+
+//contact.getAllEmail

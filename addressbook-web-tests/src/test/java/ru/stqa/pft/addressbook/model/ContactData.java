@@ -14,6 +14,8 @@ public class ContactData {
     private String mobilePhone;
     private String workPhone;
 
+    private String fax;
+
     private File photo;
 
 
@@ -49,6 +51,10 @@ public class ContactData {
     public String getAllPhones() {
         return allPhones;
     }
+    public String getFax() {
+        return fax;
+    }
+
 
     public String getAllEmail() {
         return allEmail;
@@ -90,6 +96,11 @@ public class ContactData {
 
     public ContactData withWorkPhone(String workPhone) {
         this.workPhone = workPhone;
+        return this;
+    }
+
+    public ContactData withFaxPhone(String fax) {
+        this.fax = fax;
         return this;
     }
 
