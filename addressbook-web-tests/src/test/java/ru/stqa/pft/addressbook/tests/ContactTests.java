@@ -4,14 +4,10 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
-
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Collectors;
-
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-
 
 public class ContactTests extends TestBase {
 
@@ -23,7 +19,6 @@ public class ContactTests extends TestBase {
                     withFirstName("Vasiliy").withLastName("Bochkarev").withAllPhones("7777777").withAllEmail("vaipermail@rambler.ru"));
         }
     }
-
     @Test
     public void testsContactPhones() {
         app.goToCon().homeContact();
@@ -32,45 +27,25 @@ public class ContactTests extends TestBase {
         ContactData contacInfoFromEditForm = app.goToCon().infoFromEditForm(contactPhones);
 
         assertThat(contactPhones.getAllPhones(), equalTo(mergePhones(contacInfoFromEditForm)));
-        assertThat(contactPhones.getAllAddress(), equalTo(mergeAddress(contacInfoFromEditForm)));
+        assertThat(contactPhones.getAddress(), equalTo(contacInfoFromEditForm.getAddress()));
         assertThat(contactPhones.getAllEmail(), equalTo(mergeEmail(contacInfoFromEditForm)));
-
     }
 
-
-
-
     private String mergePhones(ContactData contact) {
-        return Arrays.asList(contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone(), contact.getFax())
+        return Arrays.asList(contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone(), contact.getHometwoPhone())
                 .stream().filter((s) -> !s.equals(""))
                 .map(ContactTests::cleaned)
                 .collect(Collectors.joining("\n"));
     }
-
-    private String mergeAddress(ContactData contact) {
-        return contact.getAllAddress();
-    }
-
     private String mergeEmail(ContactData contact) {
         return Arrays.asList(contact.getAllEmail())
                 .stream().filter((s) -> !s.equals(""))
-                .map(ContactTests::cleaned)
                 .collect(Collectors.joining("\n"));
-
     }
-
-
-
-
     public static String cleaned(String phone) {
-        return phone.replaceAll("\\s", "").replaceAll("[-()]", "");
+        return phone.replaceAll("\\s", "")
+                .replaceAll("[-()]", "");
     }
-
-
-
-
-
-
 }
 
 

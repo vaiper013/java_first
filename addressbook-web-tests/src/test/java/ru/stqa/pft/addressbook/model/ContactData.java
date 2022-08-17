@@ -9,37 +9,23 @@ public class ContactData {
     private String lastName;
     private String allPhones;
     private String allEmail;
-    private String allAddress;
+    private String Address;
     private String homePhone;
     private String mobilePhone;
     private String workPhone;
-
-    private String fax;
-
+    private String hometwoPhone;
     private File photo;
 
 
+    public String getHomePhone() { return homePhone; }
 
+    public String getMobilePhone() { return mobilePhone; }
 
+    public String getWorkPhone() { return workPhone; }
 
+    public String getHometwoPhone() { return hometwoPhone; }
 
-
-
-
-    public String getHomePhone() { return homePhone;
-    }
-
-    public String getMobilePhone() {
-        return mobilePhone;
-    }
-
-    public String getWorkPhone() {
-        return workPhone;
-    }
-
-    public int getId() {
-        return id;
-    }
+    public int getId() { return id; }
     public String getFirstName() {
         return firstName;
     }
@@ -51,16 +37,12 @@ public class ContactData {
     public String getAllPhones() {
         return allPhones;
     }
-    public String getFax() {
-        return fax;
-    }
-
 
     public String getAllEmail() {
         return allEmail;
     }
 
-    public String getAllAddress() { return allAddress; }
+    public String getAddress() { return Address; }
 
     public File getPhoto() {   return photo;    }
 
@@ -98,20 +80,18 @@ public class ContactData {
         this.workPhone = workPhone;
         return this;
     }
-
-    public ContactData withFaxPhone(String fax) {
-        this.fax = fax;
+    public ContactData withHometwoPhone(String hometwoPhone) {
+        this.hometwoPhone = hometwoPhone;
         return this;
     }
-
 
     public ContactData withAllEmail(String allEmail) {
         this.allEmail = allEmail;
         return this;
     }
 
-    public ContactData withAllAddress(String allAddress) {
-        this.allAddress = allAddress;
+    public ContactData withAddress(String Address) {
+        this.Address = Address;
         return this;
     }
     public ContactData withPhoto(File photo) {
@@ -166,3 +146,11 @@ public class ContactData {
 //this.allPhones = allPhones;
 // this.allEmail = allEmail;
 // }
+
+// public ContactData withFaxPhone(String fax) {
+//        this.fax = fax;
+//        return this;
+//    }
+//public String getFax() {
+//        return fax;
+//    }
