@@ -19,7 +19,7 @@ public class ContactHelper extends HelperBase {
         type("firstname", contactData.getFirstName());
         type("lastname", contactData.getLastName());
         type("home", contactData.getAllPhones());
-        type("email", contactData.getAllEmail());
+        type("email", contactData.getEmail());
         attach(By.name("photo"), contactData.getPhoto());
         click(By.xpath("//div[@id='content']/form/input[21]"));
     }
@@ -66,7 +66,7 @@ public class ContactHelper extends HelperBase {
         wd.navigate().back();
         return new ContactData().withId(contact.getId()).withFirstName(firstname).withLastName(lastname).
                 withHomePhone(home).withMobilePhone(mobile).withHometwoPhone(hometwo).withWorkPhone(work).withAddress(address)
-                .withAllEmail(email);
+                .withEmail(email);
 
 
 
@@ -123,7 +123,7 @@ public class ContactHelper extends HelperBase {
             String allEmail = cells.get(4).getText();
             String Address = cells.get(3).getText();
             contactCacshe.add( new ContactData().withId(id).withFirstName(cells.get(2).getText()).withLastName(cells.get(1).getText())
-                    .withAllPhones(allPhones).withAllEmail(allEmail).withAddress(Address));
+                    .withAllPhones(allPhones).withEmail(allEmail).withAddress(Address));
         }
         return new Contacts(contactCacshe);
     }

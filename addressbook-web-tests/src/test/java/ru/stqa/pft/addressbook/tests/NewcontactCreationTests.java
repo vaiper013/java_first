@@ -17,7 +17,7 @@ public class NewcontactCreationTests extends TestBase {
         Contacts before = app.goToCon().all();
         File photo = new File("src/test/resources/stru.png");
         ContactData contact = new ContactData().
-                withFirstName("Vasiliy").withLastName("Bochkarev").withAllPhones("7777777").withAllEmail("vaipermail@rambler.ru").withPhoto(photo);
+                withFirstName("Vasiliy").withLastName("Bochkarev").withAllPhones("7777777").withEmail("vaipermail@rambler.ru").withPhoto(photo);
         app.goToCon().create(contact);
         assertThat(app.Group().count(), equalTo(before.size() + 1));
         Contacts after = app.goToCon().all();
