@@ -1,0 +1,23 @@
+<list>
+  <ru.stqa.pft.addressbook.model.ContactData>
+    <id>2147483647</id>
+    <firstName>Vasiliy 0</firstName>
+    <lastName>Bochkarev 0</lastName>
+    <allPhones>7777777 0</allPhones>
+    <email>vaipermail@rambler.ru</email>
+  </ru.stqa.pft.addressbook.model.ContactData>
+  <ru.stqa.pft.addressbook.model.ContactData>
+    <id>2147483647</id>
+    <firstName>Vasiliy 1</firstName>
+    <lastName>Bochkarev 1</lastName>
+    <allPhones>7777777 1</allPhones>
+    <email>vaipermail@rambler.ru</email>
+  </ru.stqa.pft.addressbook.model.ContactData>
+  <ru.stqa.pft.addressbook.model.ContactData>
+    <id>2147483647</id>
+    <firstName>Vasiliy 2</firstName>
+    <lastName>Bochkarev 2</lastName>
+    <allPhones>7777777 2</allPhones>
+    <email>vaipermail@rambler.ru</email>
+  </ru.stqa.pft.addressbook.model.ContactData>
+</list>
