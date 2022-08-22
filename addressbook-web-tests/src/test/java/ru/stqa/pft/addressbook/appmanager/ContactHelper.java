@@ -62,11 +62,13 @@ public class ContactHelper extends HelperBase {
         String work = wd.findElement(By.name("work")).getAttribute("value");
         String address = wd.findElement(By.name("address")).getAttribute("value");
         String email = wd.findElement(By.name("email")).getAttribute("value");
+        String emailtwo = wd.findElement(By.name("email2")).getAttribute("value");
+        String emailthree = wd.findElement(By.name("email3")).getAttribute("value");
 
         wd.navigate().back();
         return new ContactData().withId(contact.getId()).withFirstName(firstname).withLastName(lastname).
                 withHomePhone(home).withMobilePhone(mobile).withHometwoPhone(hometwo).withWorkPhone(work).withAddress(address)
-                .withEmail(email);
+                .withEmail(email).withEmailtwo(emailtwo).withEmailthree(emailthree);
 
 
 
