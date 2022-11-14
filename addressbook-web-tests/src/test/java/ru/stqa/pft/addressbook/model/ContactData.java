@@ -3,7 +3,6 @@ package ru.stqa.pft.addressbook.model;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import org.hibernate.annotations.Type;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -35,9 +34,15 @@ public class ContactData {
     private String group;
     @Transient
     private String allPhones;
+    @Column (name = "email")
+    @Type(type = "text")
     private String email;
+    @Transient
     private String emailtwo;
+    @Transient
     private String emailthree;
+    @Column (name = "address")
+    @Type(type = "text")
     private String Address;
     @Column (name = "home")
     @Type(type = "text")
@@ -48,9 +53,9 @@ public class ContactData {
     @Column (name = "work")
     @Type(type = "text")
     private String workPhone;
+    @Transient
     private String hometwoPhone;
-    @Column (name = "photo")
-    @Type(type = "text")
+    @Transient
     private String photo;
 
     @Override
