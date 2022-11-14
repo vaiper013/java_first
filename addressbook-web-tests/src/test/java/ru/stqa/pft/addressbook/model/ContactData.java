@@ -2,31 +2,65 @@ package ru.stqa.pft.addressbook.model;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.io.File;
 import java.util.Objects;
 
 
 @XStreamAlias("contact")
 
-
+@Entity
+@Table (name = "addressbook")
 
 public class ContactData {
+@Id
+@Column (name = "id")
+
+
+
     @XStreamOmitField
     private  int id = Integer.MAX_VALUE;
+    @Column (name = "firstName")
     private String firstName;
+    @Column (name = "lastName")
     private String lastName;
+
+    @Transient
+    private String group;
+    @Transient
     private String allPhones;
     private String email;
     private String emailtwo;
     private String emailthree;
     private String Address;
+    @Column (name = "home")
+    @Type(type = "text")
     private String homePhone;
+    @Column (name = "mobile")
+    @Type(type = "text")
     private String mobilePhone;
+    @Column (name = "work")
+    @Type(type = "text")
     private String workPhone;
     private String hometwoPhone;
-    private File photo;
+    @Column (name = "photo")
+    @Type(type = "text")
+    private String photo;
 
+    @Override
+    public String toString() {
+        return "ContactData{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                '}';
+    }
 
     public String getHomePhone() { return homePhone; }
 
@@ -59,7 +93,7 @@ public class ContactData {
 
     public String getAddress() { return Address; }
 
-    public File getPhoto() {   return photo;    }
+    public File getPhoto() {return new File(photo);}
 
     public ContactData withId(int id) {
         this.id = id;
@@ -119,7 +153,7 @@ public class ContactData {
         return this;
     }
     public ContactData withPhoto(File photo) {
-        this.photo = photo;
+        this.photo = photo.getPath();
         return this;
     }
 
@@ -139,15 +173,6 @@ public class ContactData {
     @Override
     public int hashCode() {
         return Objects.hash(id, firstName, lastName);
-    }
-
-    @Override
-    public String toString() {
-        return "ContactData{" +
-                "id='" + id + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                '}';
     }
 
 
