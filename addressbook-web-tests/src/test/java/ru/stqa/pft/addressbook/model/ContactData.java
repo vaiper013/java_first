@@ -3,13 +3,13 @@ package ru.stqa.pft.addressbook.model;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import org.hibernate.annotations.Type;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import java.io.File;
+import java.util.Objects;
 
 
 @XStreamAlias("contact")
@@ -178,6 +178,16 @@ public class ContactData {
     public ContactData withPhoto(File photo) {
         this.photo = photo.getPath();
         return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ContactData contactData = (ContactData) o;
+        return id == contactData.id && Objects.equals(firstName, contactData.firstName)
+                && Objects.equals(lastName, contactData.lastName) && Objects.equals(allPhones, contactData.allPhones)
+                && Objects.equals(email,contactData.email);
     }
 
 
