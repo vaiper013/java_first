@@ -4,7 +4,6 @@ import com.thoughtworks.xstream.XStream;
 import org.testng.annotations.*;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
-import ru.stqa.pft.addressbook.model.GroupData;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;

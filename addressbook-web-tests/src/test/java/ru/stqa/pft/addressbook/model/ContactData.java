@@ -25,7 +25,6 @@ public class ContactData {
     private String firstName;
     @Column(name = "lastName")
     private String lastName;
-
     @Transient
     private String group;
     @Transient
@@ -43,6 +42,7 @@ public class ContactData {
     @Column(name = "home")
     @Type(type = "text")
     private String homePhone;
+
     @Column(name = "mobile")
     @Type(type = "text")
     private String mobilePhone;
@@ -184,13 +184,14 @@ public class ContactData {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ContactData contactData = (ContactData) o;
-        return id == contactData.id && Objects.equals(firstName, contactData.firstName)
-                && Objects.equals(lastName, contactData.lastName) && Objects.equals(allPhones, contactData.allPhones)
-                && Objects.equals(email,contactData.email);
+        ContactData that = (ContactData) o;
+        return id == that.id && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(email, that.email);
     }
 
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName, email);
+    }
 }
 
 //public ContactData(String firstName, String lastName, String allPhones, String allEmail) {
@@ -216,4 +217,18 @@ public class ContactData {
 //    }
 //public String getFax() {
 //        return fax;
+//    }
+
+//@Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        ContactData contactData = (ContactData) o;
+//        return id == contactData.id && Objects.equals(firstName, contactData.firstName)
+//                && Objects.equals(lastName, contactData.lastName) && Objects.equals(allPhones, contactData.allPhones)
+//                && Objects.equals(email,contactData.email);
+//    }
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(id, firstName, lastName, allPhones, email);
 //    }
