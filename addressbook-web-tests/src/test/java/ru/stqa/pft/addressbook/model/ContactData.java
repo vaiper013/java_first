@@ -193,6 +193,7 @@ public class ContactData {
         return Objects.hash(id, firstName, lastName, email);
     }
 }
+//добавил
 
 //public ContactData(String firstName, String lastName, String allPhones, String allEmail) {
 //this.id = Integer.MAX_VALUE;
