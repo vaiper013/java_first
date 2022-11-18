@@ -31,7 +31,4 @@ public class ContactDeletionTests extends TestBase {
 
 
 
-//int index = before.size() - 1;
-//before.remove(deletedContact);
-//Assert.assertEquals(before, after);
-//assertEquals(after.size(), before.size() -1);
+
