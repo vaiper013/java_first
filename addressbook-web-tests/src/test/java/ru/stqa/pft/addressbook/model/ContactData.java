@@ -38,7 +38,7 @@ public class ContactData {
     private String emailthree;
     @Column(name = "address")
     @Type(type = "text")
-    private String Address;
+    private String address;
     @Column(name = "home")
     @Type(type = "text")
     private String homePhone;
@@ -108,7 +108,7 @@ public class ContactData {
     }
 
     public String getAddress() {
-        return Address;
+        return address;
     }
 
     public File getPhoto() {
@@ -170,8 +170,8 @@ public class ContactData {
         return this;
     }
 
-    public ContactData withAddress(String Address) {
-        this.Address = Address;
+    public ContactData withAddress(String address) {
+        this.address = address;
         return this;
     }
 
@@ -185,12 +185,12 @@ public class ContactData {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ContactData that = (ContactData) o;
-        return id == that.id && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(email, that.email) && Objects.equals(Address, that.Address);
+        return id == that.id && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(email, that.email) && Objects.equals(address, that.address);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, email, Address);
+        return Objects.hash(id, firstName, lastName, email, address);
     }
 }
 //добавил

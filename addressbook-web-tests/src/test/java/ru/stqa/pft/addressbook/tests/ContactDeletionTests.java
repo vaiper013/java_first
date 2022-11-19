@@ -13,7 +13,7 @@ public class ContactDeletionTests extends TestBase {
     app.goToCon().homeContact();
     if (app.db().contacts().size() == 0) {
       app.goToCon().create(new ContactData().
-              withFirstName("Vasiliy").withLastName("Bochkarev").withAllPhones("7777777").withEmail("vaipermail@rambler.ru"));
+              withFirstName("Vasiliy").withLastName("Bochkarev").withAddress("Koroleva13").withAllPhones("7777777").withEmail("vaipermail@rambler.ru"));
     }
   }
 

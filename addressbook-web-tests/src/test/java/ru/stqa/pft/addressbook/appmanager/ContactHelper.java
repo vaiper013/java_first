@@ -20,6 +20,7 @@ public class ContactHelper extends HelperBase {
         type("lastname", contactData.getLastName());
         type("home", contactData.getAllPhones());
         type("email", contactData.getEmail());
+        type("address", contactData.getAddress());
         //attach(By.name("photo"), contactData.getPhoto());
         click(By.xpath("//div[@id='content']/form/input[21]"));
     }
@@ -123,9 +124,9 @@ public class ContactHelper extends HelperBase {
             List<WebElement> cells = element.findElements(By.tagName("td"));
             String allPhones = cells.get(5).getText();
             String allEmail = cells.get(4).getText();
-            String Address = cells.get(3).getText();
+            String address = cells.get(3).getText();
             contactCacshe.add( new ContactData().withId(id).withFirstName(cells.get(2).getText()).withLastName(cells.get(1).getText())
-                    .withAllPhones(allPhones).withEmail(allEmail).withAddress(Address));
+                    .withAllPhones(allPhones).withEmail(allEmail).withAddress(address));
         }
         return new Contacts(contactCacshe);
     }

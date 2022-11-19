@@ -5,20 +5,20 @@
     <allPhones>7777777 0</allPhones>
     <email>vaipermail@rambler.ru</email>
     <address>Koroleva13</address>
-
-  </contact>
+    </contact>
   <contact>
     <firstName>Vasiliy 1</firstName>
     <lastName>Bochkarev 1</lastName>
     <allPhones>7777777 1</allPhones>
     <email>vaipermail@rambler.ru</email>
     <address>Koroleva13</address>
-  </contact>
+    </contact>
   <contact>
     <firstName>Vasiliy 2</firstName>
     <lastName>Bochkarev 2</lastName>
     <allPhones>7777777 2</allPhones>
     <email>vaipermail@rambler.ru</email>
     <address>Koroleva13</address>
-  </contact>
+    </contact>
 </list>
+
