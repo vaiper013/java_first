@@ -28,8 +28,11 @@ public class GroupModificationTests extends TestBase {
         assertThat(app.Group().count(), equalTo(before.size()));
         Groups after = app.db().groups();
         assertThat(after, equalTo(before.without(modifiedGroup).withAdded(group)));
+        verifyGroupListInUI();
 
     }
+
+
 }
 
 //Comparator<? super GroupData> byid = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());

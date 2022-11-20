@@ -19,21 +19,22 @@ public class NewcontactCreationTests extends TestBase {
     @DataProvider
     public Iterator<Object[]> validContacts() throws IOException {
         try (
-            BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.xml")))) {
-        String xml = "";
-        String line = reader.readLine();
-        while (line != null) {
-            xml += line;
-            line = reader.readLine();
+                BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.xml")))) {
+            String xml = "";
+            String line = reader.readLine();
+            while (line != null) {
+                xml += line;
+                line = reader.readLine();
+            }
+            XStream xstream = new XStream();
+            xstream.processAnnotations(ContactData.class);
+            List<ContactData> groups = (List<ContactData>) xstream.fromXML(xml);
+            return groups.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
         }
-        XStream xstream = new XStream();
-        xstream.processAnnotations(ContactData.class);
-        List<ContactData> groups = (List<ContactData>) xstream.fromXML(xml);
-        return groups.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();}
     }
 
-    @Test (dataProvider = "validContacts")
-    public void testNewcontactCreation(ContactData contact)  {
+    @Test(dataProvider = "validContacts")
+    public void testNewcontactCreation(ContactData contact) {
         app.goToCon().homeContact();
         Contacts before = app.db().contacts();
         app.goToCon().create(contact);
@@ -41,11 +42,12 @@ public class NewcontactCreationTests extends TestBase {
         Contacts after = app.db().contacts();
         assertThat(after, equalTo(
                 before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
+        verifyContactListInUI();
     }
 
 
     @Test(enabled = false)
-    public void testCurrentDir () {
+    public void testCurrentDir() {
         File currentDir = new File(".");
         System.out.println(currentDir.getAbsolutePath());
         File photo = new File("src/test/resources/stru.png");
@@ -53,11 +55,6 @@ public class NewcontactCreationTests extends TestBase {
         System.out.println(photo.exists());
     }
 }
-
-
-
-
-
 
 
 //Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
