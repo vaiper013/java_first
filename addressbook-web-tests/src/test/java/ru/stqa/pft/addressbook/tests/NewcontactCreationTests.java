@@ -4,6 +4,8 @@ import com.thoughtworks.xstream.XStream;
 import org.testng.annotations.*;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.Groups;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -35,6 +37,7 @@ public class NewcontactCreationTests extends TestBase {
 
     @Test(dataProvider = "validContacts")
     public void testNewcontactCreation(ContactData contact) {
+        Groups groups = app.db().groups();
         app.goToCon().homeContact();
         Contacts before = app.db().contacts();
         app.goToCon().create(contact);

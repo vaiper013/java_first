@@ -5,11 +5,17 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import org.hibernate.annotations.Type;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import java.io.File;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 
 @XStreamAlias("contact")
@@ -25,8 +31,7 @@ public class ContactData {
     private String firstName;
     @Column(name = "lastName")
     private String lastName;
-    @Transient
-    private String group;
+
     @Transient
     private String allPhones;
     @Column(name = "email")
@@ -42,7 +47,6 @@ public class ContactData {
     @Column(name = "home")
     @Type(type = "text")
     private String homePhone;
-
     @Column(name = "mobile")
     @Type(type = "text")
     private String mobilePhone;
@@ -53,6 +57,14 @@ public class ContactData {
     private String hometwoPhone;
     @Transient
     private String photo;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable (name = "address_in_groups",
+            joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
+    private Set<GroupData> groups = new HashSet<GroupData>();
+
+    public Groups getGroups() {
+        return new Groups(groups);
+    }
 
     @Override
     public String toString() {

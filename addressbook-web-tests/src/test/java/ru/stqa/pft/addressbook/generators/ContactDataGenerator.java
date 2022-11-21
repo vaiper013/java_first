@@ -5,6 +5,7 @@ import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParameterException;
 import com.thoughtworks.xstream.XStream;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -71,9 +72,17 @@ public class ContactDataGenerator {
         List<ContactData> contacts = new ArrayList<ContactData>();
         for (int i = 0; i < count; i++) {
             contacts.add(new ContactData().withFirstName(String.format("Vasiliy %s", i))
-                    .withLastName(String.format("Bochkarev %s", i)).withAddress(String.format("Koroleva13 %s", i)).withAllPhones(String.format("7777777 %s", i)).withEmail("vaipermail@rambler.ru"));
+                    .withLastName(String.format("Bochkarev %s", i)).withAddress(String.format("Koroleva13 %s", i)).withAllPhones(String.format("7777777 %s", i))
+                    .withEmail("vaipermail@rambler.ru").inGroup (groups.iterator().next));
         }
         return contacts;
+
+    }
+
+    public ContactData inGroup(GroupData group) {
+        groups.add(group);
+        return this;
+
     }
 }
 
