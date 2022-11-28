@@ -8,8 +8,8 @@ import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
-
 import java.util.List;
+
 
 public class ContactHelper extends HelperBase {
 
@@ -24,10 +24,6 @@ public class ContactHelper extends HelperBase {
         type("home", contactData.getAllPhones());
         type("email", contactData.getEmail());
         type("address", contactData.getAddress());
-
-
-        click(By.xpath("//div[@id='content']/form/input[21]"));
-
         if (creation) {
             if (contactData.getGroups().size() > 0) {
                 Assert.assertTrue(contactData.getGroups().size() == 1);
@@ -36,7 +32,7 @@ public class ContactHelper extends HelperBase {
         } else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
-
+        click(By.xpath("//div[@id='content']/form/input[21]"));
     }
 
 
@@ -67,13 +63,6 @@ public class ContactHelper extends HelperBase {
         cells.get(7).findElement(By.tagName("a")).click();
     }
 
-    public void selectContactWithoutGroup(){
-        selectedFromTheList(By.name("group"),"[none]" );
-    }
-
-    private void selectedFromTheList(By group, String s) {
-    }
-
 
     public ContactData infoFromEditForm(ContactData contact) {
         initContactModificationById(contact.getId());
@@ -97,19 +86,10 @@ public class ContactHelper extends HelperBase {
     }
 
 
-    public void submitContactModification() {
-        click(By.name("update"));
-    }
-
     public void submitContactRemoveFromGroup() {
         click(By.xpath("//input[@name='remove']"));
     }
 
-
-
-    public void submitContactCreation() {
-        click(By.name("submit"));
-    }
 
     public void submitAddContactToGroup() {
         click(By.xpath("//input[@value='Add to']"));
@@ -118,36 +98,31 @@ public class ContactHelper extends HelperBase {
     public void create(ContactData contact) {
         click(By.linkText("add new"));
         fillContactForm(contact, true);
-        submitContactCreation();
         contactCacshe = null;
         returnToContactPage();
     }
-
 
     public void modify(ContactData contact, boolean upperBotton) {
         selectContactById(contact.getId());
         initEditContactById(contact.getId());
         fillContactForm(contact, false);
-        if (upperBotton){
-            submitContactModificationUpper();}
-        else {submitContactModificationAtTheBottom();}
+        if (upperBotton) {
+            submitContactModificationUpper();
+        } else {
+            submitContactModificationAtTheBottom();
+        }
         contactCacshe = null;
         returnToContactPage();
     }
 
-    public boolean isTheAContact() {
-        return isElementPresent(By.name("selected[]"));
-    }
-    public int count() {
-        return wd.findElements(By.name("selected[]")).size();
+    public void initEditContactById(int id) {
+        wd.findElement(By.xpath("//input[contains(@id,'" + id + "')]/../..//img[@alt='Edit']")).click();
     }
 
-    public void initEditContactById(int id) {
-        wd.findElement(By.xpath("//input[contains(@id,'"+id+"')]/../..//img[@alt='Edit']")).click();
-    }
     public void submitContactModificationUpper() {
         click(By.xpath("//input[@value='Update'][1]"));
     }
+
     public void submitContactModificationAtTheBottom() {
         click(By.xpath("//input[@value='Update'][1]"));
     }
@@ -178,6 +153,7 @@ public class ContactHelper extends HelperBase {
         selectContactById(contact.getId());
         submitContactRemoveFromGroup();
     }
+
     public void selectGroupFromListById(int id) {
         wd.findElement(By.name("group")).click();
         new Select(wd.findElement(By.name("group"))).selectByValue(String.valueOf(id));
@@ -277,4 +253,21 @@ public class ContactHelper extends HelperBase {
 //        fillContactForm(contact, false);
 //        submitContactModification();
 //        returnToContactPage();
+//    }
+//public void selectContactWithoutGroup(){
+//        selectedFromTheList(By.name("group"),"[none]" );
+//    }
+// public boolean isTheAContact() {
+//        return isElementPresent(By.name("selected[]"));
+//    }
+//    public int count() {
+//        return wd.findElements(By.name("selected[]")).size();
+//    }
+// public void submitContactModification() {
+//        click(By.name("update"));
+//    }
+// private void selectedFromTheList(By group, String s) {
+//    }
+// public void submitContactCreation() {
+//        click(By.name("submit"));
 //    }

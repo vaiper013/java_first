@@ -5,7 +5,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
-
 import java.util.List;
 
 public class GroupHelper extends HelperBase {
@@ -18,9 +17,12 @@ public class GroupHelper extends HelperBase {
 
     public void fillGroupForm(GroupData groupData) {
         type(By.name("group_name"), groupData.getName());
-        type(By.name("group_header"), groupData.getHeader());
-        type(By.name("group_footer"), groupData.getFooter());
-
+        try {
+            type(By.name("group_header"), groupData.getHeader());
+            type(By.name("group_footer"), groupData.getFooter());
+        } catch (Exception ex) {
+            System.out.println("Group header or footer is empty");
+        }
     }
 
     public void submitGroupCreation() {
