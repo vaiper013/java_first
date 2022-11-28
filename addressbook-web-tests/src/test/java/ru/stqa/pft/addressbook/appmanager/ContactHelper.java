@@ -7,6 +7,8 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.GroupData;
+
 import java.util.List;
 
 public class ContactHelper extends HelperBase {
@@ -16,26 +18,27 @@ public class ContactHelper extends HelperBase {
         super(wd);
     }
 
-    public void fillConactForm(ContactData contactData) {
+    public void fillContactForm(ContactData contactData, boolean creation) {
         type("firstname", contactData.getFirstName());
         type("lastname", contactData.getLastName());
         type("home", contactData.getAllPhones());
         type("email", contactData.getEmail());
         type("address", contactData.getAddress());
-        //attach(By.name("photo"), contactData.getPhoto());
+
+
         click(By.xpath("//div[@id='content']/form/input[21]"));
 
         if (creation) {
-        if (contactData.getGroups().size() > 0) {
-            Assert.assertTrue(contactData.getGroups().size() == 1);
-            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroups().iterator().next()
-                    .getName());
+            if (contactData.getGroups().size() > 0) {
+                Assert.assertTrue(contactData.getGroups().size() == 1);
+                new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroups().iterator().next().getName());
+            }
         } else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
+
     }
 
-}
 
     public void returnToContactPage() {
         click(By.linkText("home page"));
@@ -54,14 +57,21 @@ public class ContactHelper extends HelperBase {
     }
 
     public void selectContactById(int id) {
-        wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
+        wd.findElement(By.cssSelector("input[id='" + id + "']")).click();
     }
 
     public void initContactModificationById(int id) {
-        WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value='%s']",id)));
+        WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value='%s']", id)));
         WebElement row = checkbox.findElement(By.xpath("./../.."));
         List<WebElement> cells = row.findElements(By.tagName("td"));
         cells.get(7).findElement(By.tagName("a")).click();
+    }
+
+    public void selectContactWithoutGroup(){
+        selectedFromTheList(By.name("group"),"[none]" );
+    }
+
+    private void selectedFromTheList(By group, String s) {
     }
 
 
@@ -84,7 +94,6 @@ public class ContactHelper extends HelperBase {
                 .withEmail(email).withEmailtwo(emailtwo).withEmailthree(emailthree);
 
 
-
     }
 
 
@@ -92,24 +101,55 @@ public class ContactHelper extends HelperBase {
         click(By.name("update"));
     }
 
+    public void submitContactRemoveFromGroup() {
+        click(By.xpath("//input[@name='remove']"));
+    }
+
+
+
+    public void submitContactCreation() {
+        click(By.name("submit"));
+    }
+
+    public void submitAddContactToGroup() {
+        click(By.xpath("//input[@value='Add to']"));
+    }
 
     public void create(ContactData contact) {
         click(By.linkText("add new"));
-        fillConactForm(contact);
+        fillContactForm(contact, true);
         submitContactCreation();
         contactCacshe = null;
         returnToContactPage();
     }
 
 
-
-    public void modify(ContactData contact) {
+    public void modify(ContactData contact, boolean upperBotton) {
         selectContactById(contact.getId());
-        initContactModificationById(contact.getId());
-        fillConactForm(contact);
-        submitContactModification();
+        initEditContactById(contact.getId());
+        fillContactForm(contact, false);
+        if (upperBotton){
+            submitContactModificationUpper();}
+        else {submitContactModificationAtTheBottom();}
         contactCacshe = null;
         returnToContactPage();
+    }
+
+    public boolean isTheAContact() {
+        return isElementPresent(By.name("selected[]"));
+    }
+    public int count() {
+        return wd.findElements(By.name("selected[]")).size();
+    }
+
+    public void initEditContactById(int id) {
+        wd.findElement(By.xpath("//input[contains(@id,'"+id+"')]/../..//img[@alt='Edit']")).click();
+    }
+    public void submitContactModificationUpper() {
+        click(By.xpath("//input[@value='Update'][1]"));
+    }
+    public void submitContactModificationAtTheBottom() {
+        click(By.xpath("//input[@value='Update'][1]"));
     }
 
     public void delete(ContactData contact) {
@@ -120,25 +160,45 @@ public class ContactHelper extends HelperBase {
         homeContact();
     }
 
+
     public int contactCount() {
         return wd.findElements(By.name("selected[]")).size();
     }
 
+    public void addContactToGroup(ContactData toBeAddContact, GroupData group) {
+        selectContactById(toBeAddContact.getId());
+        wd.findElement(By.name("to_group")).click();
+        new Select(wd.findElement(By.name("to_group"))).selectByValue(String.valueOf(group.getId()));
+        submitAddContactToGroup();
+
+    }
+
+    public void delContactFromGroup(ContactData contact, GroupData groupDeletion) {
+        selectGroupFromListById(groupDeletion.getId());
+        selectContactById(contact.getId());
+        submitContactRemoveFromGroup();
+    }
+    public void selectGroupFromListById(int id) {
+        wd.findElement(By.name("group")).click();
+        new Select(wd.findElement(By.name("group"))).selectByValue(String.valueOf(id));
+    }
+
+
     private Contacts contactCacshe = null;
 
     public Contacts all() {
-            if (contactCacshe !=null) {
-                return new Contacts (contactCacshe);
-            }
+        if (contactCacshe != null) {
+            return new Contacts(contactCacshe);
+        }
         contactCacshe = new Contacts();
-        List<WebElement> elements = wd.findElements(By.name("entry"));//(By.cssSelector("tr[name=entry]"))
+        List<WebElement> elements = wd.findElements(By.cssSelector("tr[name=entry]"));
         for (WebElement element : elements) {
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
             List<WebElement> cells = element.findElements(By.tagName("td"));
             String allPhones = cells.get(5).getText();
             String allEmail = cells.get(4).getText();
             String address = cells.get(3).getText();
-            contactCacshe.add( new ContactData().withId(id).withFirstName(cells.get(2).getText()).withLastName(cells.get(1).getText())
+            contactCacshe.add(new ContactData().withId(id).withFirstName(cells.get(2).getText()).withLastName(cells.get(1).getText())
                     .withAllPhones(allPhones).withEmail(allEmail).withAddress(address));
         }
         return new Contacts(contactCacshe);
@@ -199,4 +259,22 @@ public class ContactHelper extends HelperBase {
 //String [] phones = cells.get(5).getText().split("\n");
 //            contactCacshe.add( new ContactData().withId(id).withFirstName(cells.get(2).getText()).withLastName(cells.get(1).getText())
 //                    .withHomePhone(phones[0]).withMobilePhone(phones[1]).withWorkPhone(phones[2]));
+////attach(By.name("photo"), contactData.getPhoto());
 //        }
+//if (creation) {
+//        if (contactData.getGroups().size() > 0) {
+//            Assert.assertTrue(contactData.getGroups().size() == 1);
+//            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroups().iterator().next()
+//                    .getName());
+//        } else {
+//            Assert.assertFalse(isElementPresent(By.name("new_group")));
+//        }
+//submitContactModification();
+
+//public void modify(ContactData contact) {
+//        selectContactById(contact.getId());
+//        initContactModificationById(contact.getId());
+//        fillContactForm(contact, false);
+//        submitContactModification();
+//        returnToContactPage();
+//    }

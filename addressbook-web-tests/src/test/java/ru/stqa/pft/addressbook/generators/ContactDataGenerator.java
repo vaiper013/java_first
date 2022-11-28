@@ -73,17 +73,12 @@ public class ContactDataGenerator {
         for (int i = 0; i < count; i++) {
             contacts.add(new ContactData().withFirstName(String.format("Vasiliy %s", i))
                     .withLastName(String.format("Bochkarev %s", i)).withAddress(String.format("Koroleva13 %s", i)).withAllPhones(String.format("7777777 %s", i))
-                    .withEmail("vaipermail@rambler.ru").inGroup (groups.iterator().next));
+                    .withEmail("vaipermail@rambler.ru"));
         }
         return contacts;
 
     }
 
-    public ContactData inGroup(GroupData group) {
-        groups.add(group);
-        return this;
-
-    }
 }
 
 //withAddress(String.format("Koroleva13 %s", i))

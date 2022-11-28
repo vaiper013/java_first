@@ -15,6 +15,7 @@ public class ContactDeletionTests extends TestBase {
       app.goToCon().create(new ContactData().
               withFirstName("Vasiliy").withLastName("Bochkarev").withAddress("Koroleva13").withAllPhones("7777777").withEmail("vaipermail@rambler.ru"));
     }
+
   }
 
   @Test

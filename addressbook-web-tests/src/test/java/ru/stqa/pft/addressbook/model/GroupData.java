@@ -4,6 +4,7 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import org.hibernate.annotations.Type;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
@@ -30,7 +31,7 @@ public class GroupData {
 
     private  String footer;
 
-    @ManyToMany(mappedBy = "groups")
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "groups")
     private Set<ContactData> contacts = new HashSet<ContactData>();
 
     public Contacts getContacts() {
@@ -93,4 +94,7 @@ public class GroupData {
     public int hashCode() {
         return Objects.hash(id, name, header, footer);
     }
+
 }
+
+//@ManyToMany(mappedBy = "groups")
