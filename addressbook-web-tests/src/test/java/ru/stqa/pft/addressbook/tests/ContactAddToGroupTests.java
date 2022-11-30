@@ -3,6 +3,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
 
@@ -34,14 +35,18 @@ public class ContactAddToGroupTests extends TestBase{
         app.goToCon().homeContact();
         Groups groups = app.db().groups();
         GroupData groupData = getGroupByName(groups, TEST_GROUP_NAME);
-        ContactData contact = groupData.getContacts().stream().findFirst().get();
-        GroupData group =  app.db().groups().iterator().next();
-        app.goToCon().addContactToGroup(contact, group);
-        app.goToCon().homeContact();
-        ContactData contactWithGroup = app.db().contactById(contact.getId());
-        GroupData afterGroup = app.db().groupById(group.getId());
-        Assert.assertTrue(contactWithGroup.getGroups().contains(afterGroup));
-        Assert.assertTrue(afterGroup.getContacts().contains(contactWithGroup));
+        Contacts contacts = app.db().contacts();
+        for (ContactData contact : contacts) {
+            Groups contactGroups =  contact.getGroups();
+            if (!groupExists(contactGroups, TEST_GROUP_NAME)) {
+                app.goToCon().addContactToGroup(contact, groupData);
+                app.goToCon().homeContact();
+                ContactData contactWithGroup = app.db().contactById(contact.getId());
+                GroupData afterGroup = app.db().groupById(groupData.getId());
+                Assert.assertTrue(contactWithGroup.getGroups().contains(afterGroup));
+                Assert.assertTrue(afterGroup.getContacts().contains(contactWithGroup));
+            }
+        }
     }
 
     private boolean groupExists(Groups groups, String name) {

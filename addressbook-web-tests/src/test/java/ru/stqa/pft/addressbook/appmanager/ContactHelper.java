@@ -35,6 +35,14 @@ public class ContactHelper extends HelperBase {
         click(By.xpath("//div[@id='content']/form/input[21]"));
     }
 
+    public void fillContactForm(ContactData contactData) {
+        type("firstname", contactData.getFirstName());
+        type("lastname", contactData.getLastName());
+        type("home", contactData.getAllPhones());
+        type("email", contactData.getEmail());
+        type("address", contactData.getAddress());
+        click(By.xpath("//div[@id='content']/form/input[21]"));
+    }
 
     public void returnToContactPage() {
         click(By.linkText("home page"));
@@ -98,6 +106,13 @@ public class ContactHelper extends HelperBase {
     public void create(ContactData contact) {
         click(By.linkText("add new"));
         fillContactForm(contact, true);
+        contactCacshe = null;
+        returnToContactPage();
+    }
+
+    public void createWithoutGroup(ContactData contact) {
+        click(By.linkText("add new"));
+        fillContactForm(contact);
         contactCacshe = null;
         returnToContactPage();
     }
