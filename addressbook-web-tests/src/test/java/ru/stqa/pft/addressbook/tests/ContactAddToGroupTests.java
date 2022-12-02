@@ -19,14 +19,14 @@ public class ContactAddToGroupTests extends TestBase{
             app.Group().create(new GroupData().withName(TEST_GROUP_NAME));
             groups = app.db().groups();
         }
-        if (!contactsExists(groups, TEST_GROUP_NAME)) {
+
+        if (!contactWithoutNGroupExists(app.db().contacts(), TEST_GROUP_NAME)) {
             app.goToCon().create(new ContactData()
                     .withFirstName("Vasiliy")
                     .withLastName("Bochkarev")
                     .withAddress("Koroleva13")
                     .withAllPhones("7777777")
-                    .withEmail("vaipermail@rambler.ru")
-                    .inGroup(getGroupByName(groups, TEST_GROUP_NAME)));
+                    .withEmail("vaipermail@rambler.ru"));
         }
     }
 
@@ -41,11 +41,11 @@ public class ContactAddToGroupTests extends TestBase{
             if (!groupExists(contactGroups, TEST_GROUP_NAME)) {
                 app.goToCon().addContactToGroup(contact, groupData);
                 app.goToCon().homeContact();
-                ContactData contactWithGroup = app.db().contactById(contact.getId());
-                GroupData afterGroup = app.db().groupById(groupData.getId());
-                Assert.assertTrue(contactWithGroup.getGroups().contains(afterGroup));
-                Assert.assertTrue(afterGroup.getContacts().contains(contactWithGroup));
             }
+            GroupData afterGroup = app.db().groupById(groupData.getId());
+            ContactData contactWithGroup = app.db().contactById(contact.getId());
+            Assert.assertTrue(contactWithGroup.getGroups().contains(afterGroup));
+            Assert.assertTrue(afterGroup.getContacts().contains(contactWithGroup));
         }
     }
 
@@ -67,6 +67,15 @@ public class ContactAddToGroupTests extends TestBase{
         return null;
     }
 
+    private boolean contactWithoutNGroupExists(Contacts contacts, String name) {
+        for (ContactData contact : contacts) {
+            if (!groupExists(contact.getGroups(), name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private boolean contactsExists(Groups groups, String name) {
         for (GroupData group : groups) {
             if (group.getName().equalsIgnoreCase(name) && group.getContacts().size() > 0) {
@@ -76,3 +85,13 @@ public class ContactAddToGroupTests extends TestBase{
         return false;
     }
 }
+
+/*if (!contactsExists(groups, TEST_GROUP_NAME)) {
+            app.goToCon().create(new ContactData()
+                    .withFirstName("Vasiliy")
+                    .withLastName("Bochkarev")
+                    .withAddress("Koroleva13")
+                    .withAllPhones("7777777")
+                    .withEmail("vaipermail@rambler.ru")
+                    .inGroup(getGroupByName(groups, TEST_GROUP_NAME)));
+        }*/
