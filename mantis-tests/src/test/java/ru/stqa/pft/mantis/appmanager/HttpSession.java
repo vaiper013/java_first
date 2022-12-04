@@ -55,3 +55,4 @@ public class HttpSession {
         return body.contains(String.format("<span class=\"italic\">%s</span>", username));
     }
 }
+//return body.contains(String.format("<span class=\"italic\">%s</span>", username));
