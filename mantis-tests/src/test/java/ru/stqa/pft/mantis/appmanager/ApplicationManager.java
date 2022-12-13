@@ -27,6 +27,7 @@ public class ApplicationManager implements WebDriver {
     private FtpHelper ftp;
     private MailHelper mailHelper;
     private DbHelper dbHelper;
+    private SoapHelper soapHelper;
 
     public ApplicationManager(String browser) {
         this.browser = browser;
@@ -112,6 +113,13 @@ public class ApplicationManager implements WebDriver {
             navigationHelper = new NavigationHelper(this);
         }
         return navigationHelper;
+    }
+
+    public SoapHelper soap() {
+        if (soapHelper == null) {
+            soapHelper = new SoapHelper(this);
+        }
+        return soapHelper;
     }
 
     @Override
