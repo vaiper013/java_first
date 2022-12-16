@@ -1,4 +1,4 @@
-package ru.stqa.pft.rest.tests;
+package ru.stqa.pft.rest.model;
 
 
 import java.util.Objects;
@@ -48,6 +48,16 @@ public class Issue {
     @Override
     public int hashCode() {
         return Objects.hash(id, subject, description);
+    }
+
+    private String state_name;
+
+    public String getState_name() {
+        return state_name;
+    }
+
+    public void setState_name(String state_name) {
+        this.state_name = state_name;
     }
 }
 

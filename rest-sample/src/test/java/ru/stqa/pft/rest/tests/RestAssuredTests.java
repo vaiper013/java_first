@@ -7,23 +7,28 @@ import com.google.gson.reflect.TypeToken;
 import com.jayway.restassured.RestAssured;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import ru.stqa.pft.rest.model.Issue;
+
 
 import java.io.IOException;
 import java.util.Set;
 
 import static org.testng.Assert.assertEquals;
 
-public class RestAssuredTests {
+public class RestAssuredTests  extends TestBase {
 
     @BeforeClass
     public void init() {
-        RestAssured.authentication = RestAssured.basic("f2c01c8399d967884390d1e87b46b533", "");
+        RestAssured.authentication = RestAssured
+                .basic(app.getProperty("rest.administratorKey"),
+                        app.getProperty("rest.administratorPassword"));
     }
 
     @Test
     public void testCreationIssue() throws IOException {
+        skipIfNotFixed(58);
         Set<Issue> oldIssues = getIssues();
-        Issue newIssue = new Issue().withSubject("TestIssue").withDescription("new Test Issue");
+        Issue newIssue = new Issue().withSubject("TestIssueGeralt").withDescription("new Test Issue");
         int issueId = createIssue(newIssue);
         Set<Issue> newIssues = getIssues();
         oldIssues.add(newIssue.withId(issueId));
@@ -40,7 +45,6 @@ public class RestAssuredTests {
 
     }
 
-    
     private int createIssue(Issue newIssue) throws IOException {
         String json = RestAssured.given()
                 .parameter("subject", newIssue.getSubject())
