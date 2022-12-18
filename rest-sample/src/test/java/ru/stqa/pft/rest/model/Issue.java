@@ -5,9 +5,10 @@ import java.util.Objects;
 
 public class Issue {
 
-        private int id;
-        private String subject;
-        private String description;
+    private int id;
+    private String subject;
+    private String description;
+    private String state_name;
 
     public int getId() {
         return id;
@@ -23,7 +24,6 @@ public class Issue {
     }
 
 
-
     public Issue withSubject(String subject) {
         this.subject = subject;
         return this;
@@ -37,6 +37,7 @@ public class Issue {
         this.description = description;
         return this;
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -50,13 +51,12 @@ public class Issue {
         return Objects.hash(id, subject, description);
     }
 
-    private String state_name;
 
-    public String getState_name() {
+    public String getStateName() {
         return state_name;
     }
 
-    public void setState_name(String state_name) {
+    public void withStateName(String state_name) {
         this.state_name = state_name;
     }
 }

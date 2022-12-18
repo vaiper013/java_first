@@ -26,7 +26,7 @@ public class RestAssuredTests  extends TestBase {
 
     @Test
     public void testCreationIssue() throws IOException {
-        skipIfNotFixed(58);
+        skipIfNotFixed(1);
         Set<Issue> oldIssues = getIssues();
         Issue newIssue = new Issue().withSubject("TestIssueGeralt").withDescription("new Test Issue");
         int issueId = createIssue(newIssue);
@@ -53,4 +53,6 @@ public class RestAssuredTests  extends TestBase {
         JsonElement parsed = new JsonParser().parse(json);
         return parsed.getAsJsonObject().get("issue_id").getAsInt();
     }
+
+
 }
